@@ -99,6 +99,7 @@ router.register(r'http_checks', create_viewset(
     arg_model=models.HttpStatusCheck,
     arg_fields=status_check_fields + (
         'endpoint',
+        'authorization_header',
         'username',
         'password',
         'text_match',

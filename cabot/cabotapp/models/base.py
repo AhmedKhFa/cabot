@@ -473,6 +473,11 @@ class StatusCheck(PolymorphicModel):
         null=True,
         help_text='HTTP(S) endpoint to poll.',
     )
+    authorization_header = models.TextField(
+        blank=True,
+        null=True,
+        help_text='Authorization header.',
+    )
     username = models.TextField(
         blank=True,
         null=True,
@@ -771,6 +776,7 @@ class HttpStatusCheck(StatusCheck):
                 auth=auth,
                 headers={
                     "User-Agent": settings.HTTP_USER_AGENT,
+                    "Authorization": self.authorization_header,
                 },
             )
         except requests.RequestException as e:
